@@ -5,7 +5,7 @@ Version:	5.9.0rc2
 Release:	1
 License:	GPL
 Group:		Applications/Math
-Source0:	http://prdownloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
