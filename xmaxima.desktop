@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=XMaxima
+Exec=xmaxima
+Icon=/usr/share/maxima/5.9.0/xmaxima/maxima-icon.png
+Terminal=false
+Type=Application
+Categories=Science;Math;
+Encoding=UTF-8
+# vi: encoding=utf-8
