@@ -1,0 +1,27 @@
+--- maxima-5.9.0/common.mk.orig	Wed Aug 14 21:04:32 2002
++++ maxima-5.9.0/common.mk	Fri Jun 18 12:31:27 2004
+@@ -20,7 +20,7 @@
+ # genericdirDATA may contain subdirectories. Subdirectories will
+ # be created if necessary.
+ 
+-install-data-am: install-datafiles
++install-data-local: install-datafiles
+ install-datafiles: $(genericdirDATA)
+ 	@$(NORMAL_INSTALL)
+ 	$(mkinstalldirs) $(DESTDIR)$(genericdir)
+--- maxima-5.9.0/doc/info/maxima.texi.orig	Sat Feb  2 20:44:17 2002
++++ maxima-5.9.0/doc/info/maxima.texi	Fri Jun 18 12:48:30 2004
+@@ -23,9 +23,10 @@
+ Copyright 1994,2001 William F. Schelter
+ 
+ @format
+-START-INFO-DIR-ENTRY
+-* Maxima: (maxima).     A computer algebra system.
+-END-INFO-DIR-ENTRY
++@dircategory Scientific software:
++@direntry
++* Maxima: (maxima).			A computer algebra system
++@end direntry
+ @end format
+ @end ifinfo
+ 
