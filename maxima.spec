@@ -5,11 +5,11 @@ Version:	5.9.0rc1
 Release:	1
 License:	GPL
 Group:		Applications/Math
+Source0:	http://prdownloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	clisp
-Url:		http://maxima.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,16 +27,16 @@ the GPL.
 
 %description -l pl
 Maxima jest pakietem do pe³nych obliczeñ matematycznych. Ma du¿e
-mo¿liwo¶ci symbolicznych obliczeñ na polynomials, matrycach, funkcjach
-rational, integracji, Todd-coxeter, grafach, wielkich liczbach.
-Posiada symbolicznych debugger kodu ¼ród³owego w maximie. Maxima
-bazuje na oryginalnej Macsyma utworzonej w MIT w roku 1970. Posiada
-dobr± obs³ugê b³êdów, brakuje dziur w pamiêci. Przychodzi z setkami
-testów. William Schelter na University of Texas by³ odpowiedzialny za
-tworzenie od roku 1980. Zobacz na stronê
-http://www.ma.utexas.edu/maxima.html dla dalszych informacji. Ostatnio
-wypu¶ci³ Maxima na licencji GPL co pozwoli³o na swobodn± jej
-redystrybucjê.
+mo¿liwo¶ci symbolicznych obliczeñ na wielomianach, macierzach,
+funkcjach wymiernych, ca³kowania, stosowania metody Todda-Coxetera,
+rysowania, obliczeñ na wielkich liczbach. Posiada symboliczny debugger
+kodu ¼ród³owego w maximie. Maxima bazuje na oryginalnej Macsyma
+utworzonej w MIT w roku 1970. Ma dobr± obs³ugê b³êdów, nie ma wycieków
+pamiêci. Przychodzi z setkami testów. Od po³owy lat 80-tych za rozwój
+projektu odpowiada William Schelter z University of Texas. Wiêcej
+informacji na stronie http://www.ma.utexas.edu/maxima.html. Ostatnio
+uda³o mu siê uzyskaæ pozwolenie DOE na opublikowanie Maximy na
+licencji GPL.
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -60,9 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc ChangeLog README
 %attr(755,root,root) %{_bindir}/*
-%{_infodir}/*
 %attr(755,root,root) %{_libdir}/%{name}
-%{_mandir}/man?/*
 %{_datadir}/%{name}
+%{_mandir}/man?/*
+%{_infodir}/*
