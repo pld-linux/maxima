@@ -18,6 +18,8 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	clisp
 BuildRequires:	texinfo
+# for .zip source
+BuildRequires:	unzip
 %requires_eq	clisp
 Requires:	gnuplot
 Requires:	tk
