@@ -1,11 +1,13 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl):	Program do obliczeñ symbolicznych Maxima
 Name:		maxima
-Version:	5.9.0rc2
+Version:	5.9.0
 Release:	1
+Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+# Source0-md5:	a1d6d6ed6afb0eebf03df865c0a19f19
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -41,7 +43,6 @@ uda³o mu siê uzyskaæ pozwolenie DOE na opublikowanie Maximy na
 licencji GPL.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
 %setup -q
 touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
 
@@ -55,7 +56,10 @@ touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
