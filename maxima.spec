@@ -2,7 +2,7 @@ Summary:	Maxima Symbolic Computation Program
 Summary(pl):	Program do obliczeñ symbolicznych Maxima
 Name:		maxima
 Version:	5.9.0
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
@@ -50,7 +50,8 @@ touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
 %{__aclocal}
 %{__automake}
 %{__autoconf}
-%configure
+%configure \
+	--enable-clisp
 
 %{__make}
 
@@ -75,4 +76,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_desktopdir}/*
 %{_mandir}/man?/*
-%{_infodir}/*
+#%{_infodir}/*
