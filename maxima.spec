@@ -2,18 +2,18 @@ Summary:	Maxima Symbolic Computation Program
 Summary(pl):	Program do obliczeñ symbolicznych Maxima
 Name:		maxima
 Version:	5.9.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
 # Source0-md5:	a1d6d6ed6afb0eebf03df865c0a19f19
+Source1:	x%{name}.desktop
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	clisp
 %requires_eq	clisp
-Requires:	clisp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,10 +56,13 @@ touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,5 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/%{name}
 %{_datadir}/%{name}
+%{_desktopdir}/*
 %{_mandir}/man?/*
 %{_infodir}/*
