@@ -67,7 +67,7 @@ touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -75,7 +75,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
-	$RPM_BUILD_ROOT%{_pixmapsdir}
+	$RPM_BUILD_ROOT%{_pixmapsdir}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
