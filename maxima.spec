@@ -74,6 +74,8 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
+	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -91,5 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}
 %{_datadir}/%{name}
 %{_desktopdir}/*
+%{_pixmapsdir}/*
 %{_mandir}/man?/*
 %{_infodir}/maxima.info*
