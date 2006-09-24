@@ -4,13 +4,13 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl):	Program do obliczeñ symbolicznych Maxima
 Name:		maxima
-Version:	5.9.2
+Version:	5.10.0
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
-Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.zip
-# Source0-md5:	cf7b46db42f49dafb84f4cc9b4525c13
+Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+# Source0-md5:	1e7f5ecabf990f350c5f662f106d83b7
 Source1:	x%{name}.desktop
 Patch0:		%{name}-info.patch
 URL:		http://maxima.sourceforge.net/
