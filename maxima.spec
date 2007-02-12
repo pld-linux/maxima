@@ -2,7 +2,7 @@
 # TODO:
 #	- separate subpackages with: xmaxima, doc, src, (emacs?)
 Summary:	Maxima Symbolic Computation Program
-Summary(pl):	Program do obliczeñ symbolicznych Maxima
+Summary(pl.UTF-8):   Program do obliczeÅ„ symbolicznych Maxima
 Name:		maxima
 Version:	5.11.0
 Release:	1
@@ -36,17 +36,17 @@ See http://www.ma.utexas.edu/maxima.html for more information. He has
 recently been able to get DOE to allow him to distribute Maxima under
 the GPL.
 
-%description -l pl
-Maxima jest pakietem do pe³nych obliczeñ matematycznych. Ma du¿e
-mo¿liwo¶ci symbolicznych obliczeñ na wielomianach, macierzach,
-funkcjach wymiernych, ca³kowania, stosowania metody Todda-Coxetera,
-rysowania, obliczeñ na wielkich liczbach. Posiada symboliczny debugger
-kodu ¼ród³owego w maximie. Maxima bazuje na oryginalnej Macsyma
-utworzonej w MIT w roku 1970. Ma dobr± obs³ugê b³êdów, nie ma wycieków
-pamiêci. Przychodzi z setkami testów. Od po³owy lat 80-tych za rozwój
-projektu odpowiada William Schelter z University of Texas. Wiêcej
+%description -l pl.UTF-8
+Maxima jest pakietem do peÅ‚nych obliczeÅ„ matematycznych. Ma duÅ¼e
+moÅ¼liwoÅ›ci symbolicznych obliczeÅ„ na wielomianach, macierzach,
+funkcjach wymiernych, caÅ‚kowania, stosowania metody Todda-Coxetera,
+rysowania, obliczeÅ„ na wielkich liczbach. Posiada symboliczny debugger
+kodu ÅºrÃ³dÅ‚owego w maximie. Maxima bazuje na oryginalnej Macsyma
+utworzonej w MIT w roku 1970. Ma dobrÄ… obsÅ‚ugÄ™ bÅ‚Ä™dÃ³w, nie ma wyciekÃ³w
+pamiÄ™ci. Przychodzi z setkami testÃ³w. Od poÅ‚owy lat 80-tych za rozwÃ³j
+projektu odpowiada William Schelter z University of Texas. WiÄ™cej
 informacji na stronie http://www.ma.utexas.edu/maxima.html. Ostatnio
-uda³o mu siê uzyskaæ pozwolenie DOE na opublikowanie Maximy na
+udaÅ‚o mu siÄ™ uzyskaÄ‡ pozwolenie DOE na opublikowanie Maximy na
 licencji GPL.
 
 %prep
