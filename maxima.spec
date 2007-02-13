@@ -2,7 +2,7 @@
 # TODO:
 #	- separate subpackages with: xmaxima, doc, src, (emacs?)
 Summary:	Maxima Symbolic Computation Program
-Summary(pl.UTF-8):   Program do obliczeń symbolicznych Maxima
+Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
 Version:	5.11.0
 Release:	1
