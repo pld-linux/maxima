@@ -5,7 +5,7 @@ Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
 Version:	5.13.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
@@ -52,7 +52,7 @@ licencji GPL.
 %prep
 %setup -q
 %patch0 -p1
-touch doc/info/maximahtml.mk src/{clisp,cmucl,gcl}-depends.mk
+touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depends.mk
 
 %build
 %{__aclocal}
