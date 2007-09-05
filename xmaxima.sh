@@ -1,3 +1,3 @@
 #!/bin/sh
-
-MAXIMA_DIRECTORY=/usr xmaxima
+export MAXIMA_DIRECTORY=/usr
+exec xmaxima
