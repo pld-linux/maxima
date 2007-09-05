@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=XMaxima
-Exec=xmaxima
+Exec=xmaxima.sh
 Icon=maxima-icon.png
 Terminal=false
 Type=Application
