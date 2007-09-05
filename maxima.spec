@@ -12,6 +12,7 @@ Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
 # Source0-md5:	7317ba22fc485554b15aceb6bc22542b
 Source1:	x%{name}.desktop
+Source2:	x%{name}.sh
 Patch0:		%{name}-info.patch
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
@@ -72,6 +73,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}
 cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}/
 
