@@ -1,9 +1,8 @@
 [Desktop Entry]
 Name=XMaxima
 Exec=xmaxima.sh
-Icon=maxima-icon.png
+Icon=maxima-icon
 Terminal=false
 Type=Application
 Categories=Education;Science;Math;
-Encoding=UTF-8
 # vi: encoding=utf-8
