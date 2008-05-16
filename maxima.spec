@@ -4,20 +4,23 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.13.0
-Release:	3
+Version:	5.15.0
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	7317ba22fc485554b15aceb6bc22542b
+# Source0-md5:	db5338cd384bc0531e76ccdf18d760ef
 Source1:	x%{name}.desktop
 Source2:	x%{name}.sh
 Patch0:		%{name}-info.patch
+Patch1:		%{name}-missed-files.patch
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	clisp
+BuildRequires:	perl-base
+BuildRequires:	python
 BuildRequires:	texinfo
 %requires_eq	clisp
 Requires:	gnuplot
@@ -53,6 +56,7 @@ licencji GPL.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depends.mk
 
 %build
