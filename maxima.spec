@@ -1,11 +1,11 @@
 #
 # TODO:
-#	- separate subpackages with: xmaxima, doc, src, (emacs?)
+#	- separate subpackages with: doc, src, (emacs?)
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
 Version:	5.15.0
-Release:	0.2
+Release:	0.3
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
@@ -23,7 +23,6 @@ BuildRequires:	perl-base
 BuildRequires:	python
 BuildRequires:	texinfo
 %requires_eq	clisp
-Requires:	tk
 Suggests:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,6 +51,15 @@ projektu odpowiada William Schelter z University of Texas. Więcej
 informacji na stronie http://www.ma.utexas.edu/maxima.html. Ostatnio
 udało mu się uzyskać pozwolenie DOE na opublikowanie Maximy na
 licencji GPL.
+
+%package xmaxima
+Summary:	Tcl/Tk GUI interface for maxima
+Group:		Applications/Math
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	tk
+
+%description xmaxima
+Tcl/Tk GUI interface for maxima.
 
 %prep
 %setup -q
@@ -94,10 +102,18 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/maxima
+%attr(755,root,root) %{_bindir}/rmaxima
 %attr(755,root,root) %{_libdir}/%{name}
-%{_datadir}/%{name}
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/%{version}
+%{_datadir}/%{name}/%{version}/[^x]*
 %{_mandir}/man?/*
 %{_infodir}/maxima.info*
+
+%files xmaxima
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xmaxima
+%{_datadir}/maxima/%{version}/xmaxima
+%{_desktopdir}/*.desktop
+%{_pixmapsdir}/*
