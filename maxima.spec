@@ -24,8 +24,8 @@ BuildRequires:	perl-base
 BuildRequires:	python
 BuildRequires:	texinfo
 %requires_eq	clisp
-Requires:	gnuplot
 Requires:	tk
+Suggests:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
