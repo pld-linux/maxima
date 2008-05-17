@@ -1,0 +1,20 @@
+--- maxima-5.15.0.old/configure.in	2008-04-20 16:28:08.000000000 +0200
++++ maxima-5.15.0/configure.in	2008-05-16 08:29:05.000000000 +0200
+@@ -707,12 +707,12 @@
+ else
+ 	tmp_exec_prefix="${exec_prefix}"
+ fi
+-expanded_top_srcdir="`(cd \"$top_srcdir\" 1>/dev/null 2>/dev/null; pwd)`"
++expanded_top_srcdir="`(cd "$top_srcdir" 1>/dev/null 2>/dev/null; pwd)`"
+ expanded_exec_prefix="${tmp_exec_prefix}"
+-expanded_libdir="`eval \"exec_prefix=${tmp_exec_prefix};echo ${libdir}\"`"
+-expanded_libexecdir="`eval \"exec_prefix=${tmp_exec_prefix};echo ${libexecdir}\"`"
+-expanded_datadir="`eval \"prefix=${tmp_prefix};datarootdir=${datarootdir};echo ${datadir}\"`"
+-expanded_infodir="`eval \"prefix=${tmp_prefix};datarootdir=${datarootdir};echo ${infodir}\"`"
++expanded_libdir="`eval "exec_prefix=${tmp_exec_prefix};echo ${libdir}"`"
++expanded_libexecdir="`eval "exec_prefix=${tmp_exec_prefix};echo ${libexecdir}"`"
++expanded_datadir="`eval "prefix=${tmp_prefix};datarootdir=${datarootdir};echo ${datadir}"`"
++expanded_infodir="`eval "prefix=${tmp_prefix};datarootdir=${datarootdir};echo ${infodir}"`"
+ 
+ AC_SUBST(expanded_top_srcdir)
+ AC_SUBST(expanded_exec_prefix)
