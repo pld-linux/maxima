@@ -53,13 +53,17 @@ udało mu się uzyskać pozwolenie DOE na opublikowanie Maximy na
 licencji GPL.
 
 %package xmaxima
-Summary:	Tcl/Tk GUI interface for maxima
+Summary:	Tcl/Tk GUI interface for Maxima
+Summary(pl.UTF-8):	Graficzny interfejs Tcl/Tk dla Maximy
 Group:		Applications/Math
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	tk
 
 %description xmaxima
 Tcl/Tk GUI interface for maxima.
+
+%description xmaxima -l pl.UTF-8
+Graficzny interfejs Tcl/Tk dla Maximy.
 
 %prep
 %setup -q
@@ -88,15 +92,15 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
-	$RPM_BUILD_ROOT%{_pixmapsdir}/
+	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/postshell
+%post	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun	-p	/sbin/postshell
+%postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files
@@ -107,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/%{version}
-%{_datadir}/%{name}/%{version}/[^x]*
+%{_datadir}/%{name}/%{version}/[!x]*
 %{_mandir}/man?/*
 %{_infodir}/maxima.info*
 
