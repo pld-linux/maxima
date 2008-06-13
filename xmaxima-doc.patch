@@ -1,0 +1,22 @@
+diff -ur maxima-5.15.0.orig/interfaces/xmaxima/Tkmaxima/Menu.tcl maxima-5.15.0/interfaces/xmaxima/Tkmaxima/Menu.tcl
+--- maxima-5.15.0.orig/interfaces/xmaxima/Tkmaxima/Menu.tcl	2007-05-07 02:35:30.000000000 +0200
++++ maxima-5.15.0/interfaces/xmaxima/Tkmaxima/Menu.tcl	2008-06-03 19:42:16.000000000 +0200
+@@ -262,6 +262,7 @@
+     $m add separator
+     if {$tcl_platform(platform) != "windows"} {
+ 	$m add command -underline 0 -label [mc "Maxima Manual (web browser)"] \
++	    -state $state \
+ 	    -command [list eval $browse "file://$file" &]
+     }
+     $m add command -underline 0 -label [mc "Xmaxima Manual (web browser)"] \
+diff -ur maxima-5.15.0.orig/interfaces/xmaxima/Tkmaxima/Paths.tcl maxima-5.15.0/interfaces/xmaxima/Tkmaxima/Paths.tcl
+--- maxima-5.15.0.orig/interfaces/xmaxima/Tkmaxima/Paths.tcl	2007-02-25 11:34:36.000000000 +0100
++++ maxima-5.15.0/interfaces/xmaxima/Tkmaxima/Paths.tcl	2008-06-03 19:41:52.000000000 +0200
+@@ -270,6 +270,7 @@
+ 	    }
+ 	}
+     } else {
++	set maxima_priv(pReferenceToc) ""
+ 	tide_notify [M [mc "Documentation not found in '%s'"] \
+ 			 [file native  $maxima_priv(maxima_verpkgdatadir)]]
+     }
