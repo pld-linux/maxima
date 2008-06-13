@@ -1,0 +1,18 @@
+--- common.mk.orig	2008-06-06 17:51:22.000000000 +0200
++++ common.mk	2008-06-06 17:50:42.000000000 +0200
+@@ -3,13 +3,13 @@
+ verpkglibdir = $(pkglibdir)/@VERSION@
+ verpkglibexecdir = $(libexecdir)/@PACKAGE@/@VERSION@
+ verpkgdatadir = $(pkgdatadir)/@VERSION@
+-docdir = $(verpkgdatadir)/doc
++docdir = $(datadir)/doc/@PACKAGE@-doc-@VERSION@
+ dochtmldir = $(docdir)/html
+ docsharedir = $(docdir)/share
+ demodir = $(verpkgdatadir)/demo
+ emacsdir = $(verpkgdatadir)/emacs
+ sharedir = $(verpkgdatadir)/share
+-instsrcdir = $(verpkgdatadir)/src
++instsrcdir = $(prefix)/src/@PACKAGE@-@VERSION@
+ xmaximadir = $(verpkgdatadir)/xmaxima
+ insttestsdir = $(verpkgdatadir)/tests
+ 
