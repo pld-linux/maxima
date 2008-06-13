@@ -1,11 +1,11 @@
 #
 # TODO:
-#	- separate subpackages with: doc, src, (emacs?)
+#	- separate subpackages with:  emacs?
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
 Version:	5.15.0
-Release:	0.3
+Release:	0.4
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
@@ -15,6 +15,8 @@ Source1:	x%{name}.desktop
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-missed-files.patch
 Patch2:		%{name}-posix.patch
+Patch3:		x%{name}-doc.patch
+Patch4:		%{name}-install.patch
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -65,6 +67,28 @@ Tcl/Tk GUI interface for maxima.
 %description xmaxima -l pl.UTF-8
 Graficzny interfejs Tcl/Tk dla Maximy.
 
+%package src
+Summary:	Maxima lisp source code
+Summary(pl.UTF-8):	Pliki źródłowe Maximy
+Group:		Development
+
+%description src
+Maxima lisp source code.
+
+%description src -l pl.UTF-8
+Pliki źródłowe Maximy.
+
+%package doc
+Summary:	Maxima documentation
+Summary(pl.UTF-8):	Dokumentacja dla Maximy
+Group:		Documentation
+
+%description doc
+Maxima documentation.
+
+%description doc -l pl.UTF-8
+Dokumentacja dla Maximy.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -72,6 +96,8 @@ Graficzny interfejs Tcl/Tk dla Maximy.
 touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depends.mk
 
 %patch2 -p1
+%patch3 -p1
+%patch4
 
 %build
 %{__aclocal}
@@ -103,6 +129,20 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
+%triggerin doc -- %{name} = %{epoch}:%{version}
+if [ -d %{_docdir}/%{name}-doc-%{version} ]; then
+	ln -snf %{_docdir}/%{name}-doc-%{version}  %{_datadir}/%{name}/%{version}/doc
+fi
+
+%triggerun doc -- %{name} = %{epoch}:%{version}
+rm %{_datadir}/%{name}/%{version}/doc || :
+
+%triggerpostun doc -- %{name} = %{epoch}:%{version}
+if [ -d %{_docdir}/%{name}-doc-%{version} -a \
+  -d %{_datadir}/%{name}/%{version} ];  then
+	ln -snf %{_docdir}/%{name}-doc-%{version}  %{_datadir}/%{name}/%{version}/doc
+fi
+
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -111,7 +151,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/%{version}
-%{_datadir}/%{name}/%{version}/[!x]*
+%{_datadir}/%{name}/%{version}/demo
+%{_datadir}/%{name}/%{version}/emacs
+%{_datadir}/%{name}/%{version}/share
+%{_datadir}/%{name}/%{version}/tests
 %{_mandir}/man?/*
 %{_infodir}/maxima.info*
 
@@ -121,3 +164,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/maxima/%{version}/xmaxima
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
+
+%files doc
+%defattr(644,root,root,755)
+%{_docdir}/%{name}-doc-%{version}
+
+%files src
+%defattr(644,root,root,755)
+%{_usrsrc}/maxima-%{version}
