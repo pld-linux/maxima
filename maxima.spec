@@ -167,6 +167,7 @@ fi
 %attr(755,root,root) %{_bindir}/xmaxima
 %{_datadir}/maxima/%{version}/xmaxima
 %{_desktopdir}/*.desktop
+%{_infodir}/xmaxima.info*
 %{_pixmapsdir}/*
 
 %files doc
