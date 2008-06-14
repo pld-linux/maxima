@@ -17,6 +17,7 @@ Patch1:		%{name}-missed-files.patch
 Patch2:		%{name}-posix.patch
 Patch3:		x%{name}-doc.patch
 Patch4:		%{name}-install.patch
+Patch5:		%{name}-info-compressed.patch
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -25,6 +26,7 @@ BuildRequires:	perl-base
 BuildRequires:	python
 BuildRequires:	texinfo
 %requires_eq	clisp
+Requires:	gzip
 Suggests:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -98,6 +100,7 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 %patch2 -p1
 %patch3 -p1
 %patch4
+%patch5
 
 %build
 %{__aclocal}
@@ -157,6 +160,7 @@ fi
 %{_datadir}/%{name}/%{version}/tests
 %{_mandir}/man?/*
 %{_infodir}/maxima.info*
+%{_infodir}/maxima-index.lisp
 
 %files xmaxima
 %defattr(644,root,root,755)
