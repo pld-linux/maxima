@@ -1,6 +1,3 @@
-#
-# TODO:
-#	- separate subpackages with:  emacs?
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
@@ -12,6 +9,7 @@ Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
 # Source0-md5:	db5338cd384bc0531e76ccdf18d760ef
 Source1:	x%{name}.desktop
+Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-missed-files.patch
 Patch2:		%{name}-posix.patch
@@ -22,6 +20,7 @@ URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	clisp
+BuildRequires:	emacs
 BuildRequires:	perl-base
 BuildRequires:	python
 BuildRequires:	texinfo
@@ -91,6 +90,18 @@ Maxima documentation.
 %description doc -l pl.UTF-8
 Dokumentacja dla Maximy.
 
+%package emacs
+Summary:	Emacs mode for Maxima
+Summary(pl.UTF-8):	Tryb Maximy dla Emacsa
+Group:		Applications/Math
+Requires:	emacs-common
+
+%description emacs
+Emacs mode files for Maxima.
+
+%description emacs -l pl.UTF-8
+Tryb Maximy dla Emacsa.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -113,7 +124,7 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_emacs_lispdir}/{,site-start.d}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -122,6 +133,9 @@ rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}
+
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/%version/emacs $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -155,7 +169,6 @@ fi
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/%{version}
 %{_datadir}/%{name}/%{version}/demo
-%{_datadir}/%{name}/%{version}/emacs
 %{_datadir}/%{name}/%{version}/share
 %{_datadir}/%{name}/%{version}/tests
 %{_mandir}/man?/*
@@ -169,6 +182,11 @@ fi
 %{_desktopdir}/*.desktop
 %{_infodir}/xmaxima.info*
 %{_pixmapsdir}/*
+
+%files emacs
+%defattr(644,root,root,755)
+%{_emacs_lispdir}/%{name}
+%{_emacs_lispdir}/site-start.d/%{name}-mode-init.el
 
 %files doc
 %defattr(644,root,root,755)
