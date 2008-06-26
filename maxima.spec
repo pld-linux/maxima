@@ -90,16 +90,16 @@ Maxima documentation.
 %description doc -l pl.UTF-8
 Dokumentacja dla Maximy.
 
-%package emacs
+%package -n emacs-maxima-pkg
 Summary:	Emacs mode for Maxima
 Summary(pl.UTF-8):	Tryb Maximy dla Emacsa
 Group:		Applications/Math
 Requires:	emacs-common
 
-%description emacs
+%description -n emacs-maxima-pkg
 Emacs mode files for Maxima.
 
-%description emacs -l pl.UTF-8
+%description -n emacs-maxima-pkg -l pl.UTF-8
 Tryb Maximy dla Emacsa.
 
 %prep
@@ -184,7 +184,7 @@ fi
 %{_infodir}/xmaxima.info*
 %{_pixmapsdir}/*
 
-%files emacs
+%files -n emacs-maxima-pkg
 %defattr(644,root,root,755)
 %{_emacs_lispdir}/%{name}
 %{_emacs_lispdir}/site-start.d/%{name}-mode-init.el
