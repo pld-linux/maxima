@@ -1,6 +1,7 @@
---- maxima-5.9.0/doc/info/maxima.texi.orig	Sat Feb  2 20:44:17 2002
-+++ maxima-5.9.0/doc/info/maxima.texi	Fri Jun 18 12:48:30 2004
-@@ -23,9 +23,10 @@
+diff -burNp maxima-5.17.0/doc/info/include-maxima.texi.in maxima-5.17.0-dud/doc/info/include-maxima.texi.in
+--- maxima-5.17.0/doc/info/include-maxima.texi.in	2008-12-03 05:57:01.000000000 +0100
++++ maxima-5.17.0-dud/doc/info/include-maxima.texi.in	2009-02-17 20:15:58.766974769 +0100
+@@ -21,9 +21,10 @@ This is a Texinfo Maxima Manual
  Copyright 1994,2001 William F. Schelter
  
  @format
@@ -9,7 +10,7 @@
 -END-INFO-DIR-ENTRY
 +@dircategory Scientific software:
 +@direntry
-+* Maxima: (maxima).			A computer algebra system
++* Maxima: (maxima).                    A computer algebra system
 +@end direntry
  @end format
  @end ifinfo
