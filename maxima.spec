@@ -1,13 +1,13 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.19.1
+Version:	5.19.2
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	5b23dcfccad10988e344a839a0fbbe2b
+# Source0-md5:	c75eec2586f5be18e02978e70fac0b07
 Source1:	x%{name}.desktop
 Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
@@ -148,7 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %triggerin doc -- %{name} = %{epoch}:%{version}
 if [ -d %{_docdir}/%{name}-doc-%{version} ]; then
-	ln -snf %{_docdir}/%{name}-doc-%{version}  %{_datadir}/%{name}/%{version}/doc
+	ln -snf %{_docdir}/%{name}-doc-%{version} %{_datadir}/%{name}/%{version}/doc
 fi
 
 %triggerun doc -- %{name} = %{epoch}:%{version}
@@ -156,8 +156,8 @@ rm %{_datadir}/%{name}/%{version}/doc || :
 
 %triggerpostun doc -- %{name} = %{epoch}:%{version}
 if [ -d %{_docdir}/%{name}-doc-%{version} -a \
-  -d %{_datadir}/%{name}/%{version} ];  then
-	ln -snf %{_docdir}/%{name}-doc-%{version}  %{_datadir}/%{name}/%{version}/doc
+	-d %{_datadir}/%{name}/%{version} ]; then
+	ln -snf %{_docdir}/%{name}-doc-%{version} %{_datadir}/%{name}/%{version}/doc
 fi
 
 %files
