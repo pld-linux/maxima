@@ -1,13 +1,13 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.19.2
+Version:	5.22.1
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://dl.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	c75eec2586f5be18e02978e70fac0b07
+# Source0-md5:	160ea8be39127d6636b934a85e407c9b
 Source1:	x%{name}.desktop
 Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
@@ -104,7 +104,7 @@ Tryb Maximy dla Emacsa.
 
 %prep
 %setup -q
-%patch0 -p1
+# %patch0 -p1
 %patch1 -p1
 touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depends.mk
 
