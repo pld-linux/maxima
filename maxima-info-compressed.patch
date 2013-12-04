@@ -1,10 +1,10 @@
 diff -burNp maxima-5.17.0/src/cl-info.lisp maxima-5.17.0-dud/src/cl-info.lisp
 --- maxima-5.17.0/src/cl-info.lisp	2008-04-30 21:55:36.000000000 +0200
 +++ maxima-5.17.0-dud/src/cl-info.lisp	2009-02-17 20:20:25.119541499 +0100
-@@ -173,12 +173,17 @@
- 	      ""
- 	      (concatenate 'string "/" maxima::*maxima-lang-subdir*)))
- 	 (path+filename (concatenate 'string maxima::*maxima-infodir* subdir-bit "/" filename)))
+@@ -198,12 +198,18 @@
+      (byte-count (caddr value))
+      (text (make-string byte-count))
+      (path+filename (make-pathname :directory dir-name :name filename)))
 +    (if (probe-file path+filename)
      (with-open-file (in path+filename :direction :input)
        (file-position in byte-offset)
@@ -16,7 +16,5 @@ diff -burNp maxima-5.17.0/src/cl-info.lisp maxima-5.17.0-dud/src/cl-info.lisp
 +               #+gcl (gcl-read-sequence text in :start 0 :end byte-count)
 +               #-gcl (read-sequence text in :start 0 :end byte-count)))
      text))
--
+ 
  #+gcl
- (defun gcl-read-sequence (s in &key (start 0) (end nil))
-   (dotimes (i (- end start))
