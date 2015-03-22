@@ -2,7 +2,7 @@ Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
 Version:	5.31.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
@@ -144,6 +144,12 @@ rm -rf $RPM_BUILD_ROOT
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %postun	-p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%post	xmaxima -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%postun	xmaxima -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %triggerin doc -- %{name} = %{epoch}:%{version}
