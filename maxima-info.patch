@@ -1,17 +1,132 @@
-diff -burNp maxima-5.17.0/doc/info/include-maxima.texi.in maxima-5.17.0-dud/doc/info/include-maxima.texi.in
---- maxima-5.17.0/doc/info/include-maxima.texi.in	2008-12-03 05:57:01.000000000 +0100
-+++ maxima-5.17.0-dud/doc/info/include-maxima.texi.in	2009-02-17 20:15:58.766974769 +0100
-@@ -21,9 +21,10 @@ This is a Texinfo Maxima Manual
+--- maxima-5.41.0/doc/info/include-maxima.texi.in.orig	2016-04-02 23:42:45.000000000 +0200
++++ maxima-5.41.0/doc/info/include-maxima.texi.in	2017-12-05 18:39:24.774984467 +0100
+@@ -39,10 +39,10 @@
  Copyright 1994,2001 William F. Schelter
  
  @format
+-INFO-DIR-SECTION Math
 -START-INFO-DIR-ENTRY
 -* Maxima: (maxima).     A computer algebra system.
 -END-INFO-DIR-ENTRY
 +@dircategory Scientific software:
 +@direntry
-+* Maxima: (maxima).                    A computer algebra system
++* Maxima: (maxima).			A computer algebra system
++@end direntry
+ @end format
+ 
+ @macro var {expr}
+--- maxima-5.41.0/interfaces/emacs/imaxima/imaxima.texi.orig	2016-04-02 23:42:45.000000000 +0200
++++ maxima-5.41.0/interfaces/emacs/imaxima/imaxima.texi	2017-12-05 20:52:02.691560267 +0100
+@@ -9,9 +9,9 @@
+ @synindex fn cp
+ @synindex vr cp
+ @synindex pg cp
+-@dircategory Emacs
++@dircategory Emacs:
+ @direntry
+-* Imaxima: (imaxima).   Image support for the computer algebra system Maxima. Interactive math minor mode.
++* Imaxima: (imaxima).			Image support for the computer algebra system Maxima. Interactive math minor mode
+ @end direntry
+ 
+ @iftex
+--- maxima-5.41.0/interfaces/xmaxima/doc/xmaxima.texi.orig	2016-04-02 23:42:45.000000000 +0200
++++ maxima-5.41.0/interfaces/xmaxima/doc/xmaxima.texi	2017-12-05 20:53:04.221559565 +0100
+@@ -27,10 +27,10 @@
+ MA 02110-1301, USA.
+ 
+ @format
+-INFO-DIR-SECTION Math
+-START-INFO-DIR-ENTRY
+-* Xmaxima: (xmaxima).     Graphical interface for Maxima.
+-END-INFO-DIR-ENTRY
++@dircategory Scientific software:
++@direntry
++* Xmaxima: (xmaxima).			Graphical interface for Maxima
 +@end direntry
  @end format
  @end ifinfo
  
+--- maxima-5.41.0/share/template.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/template.texi	2017-12-05 20:54:11.268225467 +0100
+@@ -28,9 +28,9 @@
+ @c    @include NEXTTOPIC.texi
+ 
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* MYTOPIC: (maxima/mytopic).           Maxima share package MYTOPIC for foo bar baz quux.
++* MYTOPIC: (maxima/mytopic).		Maxima share package MYTOPIC for foo bar baz quux
+ @end direntry
+ 
+ @menu
+--- maxima-5.41.0/share/template-standalone.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/template-standalone.texi	2017-12-05 20:54:36.038225183 +0100
+@@ -21,9 +21,9 @@
+ @end macro
+ @end ifinfo
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* MYTOPIC: (maxima/mytopic).           Maxima share package MYTOPIC for foo bar baz quux.
++* MYTOPIC: (maxima/mytopic).		Maxima share package MYTOPIC for foo bar baz quux
+ @end direntry
+ 
+ @node Top, Introduction to MYTOPIC, (dir), (dir)
+--- maxima-5.41.0/share/contrib/integration/abs_integrate.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/contrib/integration/abs_integrate.texi	2017-12-05 20:55:44.868224398 +0100
+@@ -9,9 +9,9 @@
+ @end macro
+ @end ifinfo
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* abs_integrate: (maxima/abs_integrate).           Maxima share package abs_integrate for integrating absolute value and friends.
++* abs_integrate: (maxima/abs_integrate).	Maxima share package abs_integrate for integrating absolute value and friends
+ @end direntry
+ 
+ @node Top, Introduction to abs_integrate, (dir), (dir)
+--- maxima-5.41.0/share/draw/drawutils.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/draw/drawutils.texi	2017-12-05 20:56:30.734890540 +0100
+@@ -13,9 +13,9 @@
+ @end macro
+ @end ifinfo
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* drawutils: (maxima/drawutils).           Maxima share package drawutils: additional drawing functions for package draw.
++* drawutils: (maxima/drawutils).	Maxima share package drawutils: additional drawing functions for package draw
+ @end direntry
+ 
+ @node Top, Introduction to drawutils, (dir), (dir)
+--- maxima-5.41.0/share/logic/logic.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/logic/logic.texi	2017-12-05 20:56:58.058223562 +0100
+@@ -32,9 +32,9 @@
+ @end macro
+ @end ifinfo
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* logic: (maxima/logic).           Maxima share package logic for operations on Boolean variables.
++* logic: (maxima/logic).		Maxima share package logic for operations on Boolean variables
+ @end direntry
+ 
+ @node Top, Introduction to logic, (dir), (dir)
+--- maxima-5.41.0/share/contrib/maxima-odesolve/kovacicODE.texi.orig	2017-09-28 03:41:16.000000000 +0200
++++ maxima-5.41.0/share/contrib/maxima-odesolve/kovacicODE.texi	2017-12-05 20:57:42.718223051 +0100
+@@ -13,9 +13,9 @@
+ @end ifinfo
+ 
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* kovacicODE: (maxima/kovacicODE).           Maxima share package kovacicODE: Kovacic's method for differential equations.
++* kovacicODE: (maxima/kovacicODE).	Maxima share package kovacicODE: Kovacic's method for differential equations
+ @end direntry
+ 
+ @node Top, Introduction to kovacicODE, (dir), (dir)

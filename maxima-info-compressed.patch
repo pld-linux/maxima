@@ -1,20 +1,26 @@
-diff -burNp maxima-5.17.0/src/cl-info.lisp maxima-5.17.0-dud/src/cl-info.lisp
---- maxima-5.17.0/src/cl-info.lisp	2008-04-30 21:55:36.000000000 +0200
-+++ maxima-5.17.0-dud/src/cl-info.lisp	2009-02-17 20:20:25.119541499 +0100
-@@ -198,12 +198,18 @@
-      (byte-count (caddr value))
-      (text (make-string byte-count))
-      (path+filename (make-pathname :directory dir-name :name filename)))
+--- maxima-5.41.0/src/cl-info.lisp.orig	2017-12-05 18:40:03.114984028 +0100
++++ maxima-5.41.0/src/cl-info.lisp	2017-12-05 20:06:02.988258446 +0100
+@@ -207,15 +207,22 @@
+      (char-count (caddr value))
+      (text (make-string char-count))
+      (path+filename (merge-pathnames (make-pathname :name filename) dir-name)))
+-    (with-open-file (in path+filename :direction :input)
+       (unless (plusp byte-offset)
+ 	;; If byte-offset isn't positive there must be some error in
+ 	;; the index.  Return nil and let the caller deal with it.
+ 	(return-from read-info-text nil))
 +    (if (probe-file path+filename)
-     (with-open-file (in path+filename :direction :input)
++    (with-open-file (in path+filename :direction :input)
        (file-position in byte-offset)
-       #+gcl (gcl-read-sequence text in :start 0 :end byte-count)
-       #-gcl (read-sequence text in :start 0 :end byte-count))
-+       (with-open-stream (in (ext:run-shell-command (concatenate 'string "gunzip -c " path+filename ".gz") :output :stream))
-+               (dotimes (ibytes byte-offset)
-+                       (read-char in))
-+               #+gcl (gcl-read-sequence text in :start 0 :end byte-count)
-+               #-gcl (read-sequence text in :start 0 :end byte-count)))
+       (#-gcl read-sequence
+        #+gcl gcl-read-sequence
+        text in :start 0 :end char-count))
++    (with-open-stream (in (ext:run-shell-command (concatenate 'string "gunzip -c " path+filename ".gz") :output :stream))
++      (dotimes (ibytes byte-offset)
++	      (read-char in))
++      (#-gcl read-sequence
++       #+gcl gcl-read-sequence
++       text in :start 0 :end char-count)))
      text))
  
  #+gcl

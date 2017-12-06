@@ -1,28 +1,32 @@
+#
+# Conditional build:
+%bcond_without	emacs	# Emacs mode
+
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.31.3
-Release:	5
+Version:	5.41.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
-Source0:	http://download.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	02b3b089b6a5581c410f3dcc57bfdde8
-Source1:	x%{name}.desktop
+Source0:	http://downloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+# Source0-md5:	972c51384d7895c88d78eb045c6aedb2
 Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-missed-files.patch
-Patch2:		%{name}-posix.patch
 Patch3:		x%{name}-doc.patch
 Patch4:		%{name}-install.patch
 Patch5:		%{name}-info-compressed.patch
 URL:		http://maxima.sourceforge.net/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	clisp
-BuildRequires:	emacs
-BuildRequires:	perl-base
-BuildRequires:	python
+%{?with_emacs:BuildRequires:	emacs}
+BuildRequires:	gettext-tools
+BuildRequires:	perl-base >= 5
+BuildRequires:	python >= 2
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	texinfo
 %requires_eq	clisp
 Requires:	gzip
@@ -55,11 +59,25 @@ informacji na stronie http://www.ma.utexas.edu/maxima.html. Ostatnio
 udało mu się uzyskać pozwolenie DOE na opublikowanie Maximy na
 licencji GPL.
 
+%package -n bash-completion-maxima
+Summary:	Bash completion for Maxima
+Summary(pl.UTF-8):	Bashowe dopełnianie parametrów dla Maximy
+Group:		Applications/Shells
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	bash-completion >= 2.0
+
+%description -n bash-completion-maxima
+Bash completion for Maxima.
+
+%description -n bash-completion-maxima -l pl.UTF-8
+Bashowe dopełnianie parametrów dla Maximy.
+
 %package xmaxima
 Summary:	Tcl/Tk GUI interface for Maxima
 Summary(pl.UTF-8):	Graficzny interfejs Tcl/Tk dla Maximy
 Group:		Applications/Math
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	shared-mime-info
 Requires:	tk
 
 %description xmaxima
@@ -67,6 +85,19 @@ Tcl/Tk GUI interface for maxima.
 
 %description xmaxima -l pl.UTF-8
 Graficzny interfejs Tcl/Tk dla Maximy.
+
+%package -n bash-completion-xmaxima
+Summary:	Bash completion for XMaxima
+Summary(pl.UTF-8):	Bashowe dopełnianie parametrów dla XMaximy
+Group:		Applications/Shells
+Requires:	%{name}-xmaxima = %{epoch}:%{version}-%{release}
+Requires:	bash-completion >= 2.0
+
+%description -n bash-completion-xmaxima
+Bash completion for XMaxima.
+
+%description -n bash-completion-xmaxima -l pl.UTF-8
+Bashowe dopełnianie parametrów dla XMaximy.
 
 %package src
 Summary:	Maxima lisp source code
@@ -104,11 +135,10 @@ Tryb Maximy dla Emacsa.
 
 %prep
 %setup -q
-# %patch0 -p1
+%patch0 -p1
 %patch1 -p1
 touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depends.mk
 
-%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
@@ -118,24 +148,33 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 %{__automake}
 %{__autoconf}
 %configure \
-	--enable-clisp
+	--enable-clisp \
+	--enable-gettext
+
+# TODO: --enable-lang-de[-utf8?] --enable-lang-es[-utf8?] --enable-lang-pt[-utf8?] --enable-lang-pt_BR[-utf8?]
+# for localized info pages
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_emacs_lispdir}/{,site-start.d}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -f $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/xmaxima/%{name}-icon.png \
-	$RPM_BUILD_ROOT%{_pixmapsdir}
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}/%version/emacs $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
+install -Dp doc/man/ru/maxima.1 $RPM_BUILD_ROOT%{_mandir}/ru/man1/maxima.1
+
+%if %{with emacs}
+install -d $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/emacs $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
+%else
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/emacs
+%endif
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -146,11 +185,13 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%post	xmaxima -p /sbin/postshell
--/usr/sbin/fix-info-dir -c %{_infodir}
+%post	xmaxima
+%update_mime_database
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
 
-%postun	xmaxima -p /sbin/postshell
--/usr/sbin/fix-info-dir -c %{_infodir}
+%postun	xmaxima
+%update_mime_database
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
 
 %triggerin doc -- %{name} = %{epoch}:%{version}
 if [ -d %{_docdir}/%{name}-doc-%{version} ]; then
@@ -166,34 +207,61 @@ if [ -d %{_docdir}/%{name}-doc-%{version} -a \
 	ln -snf %{_docdir}/%{name}-doc-%{version} %{_datadir}/%{name}/%{version}/doc
 fi
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ChangeLog README
+%doc AUTHORS COPYING ChangeLog-5* README
 %attr(755,root,root) %{_bindir}/maxima
 %attr(755,root,root) %{_bindir}/rmaxima
-%attr(755,root,root) %{_libdir}/%{name}
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/%{version}
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/mgnuplot
+%dir %{_libdir}/%{name}/%{version}/binary-clisp
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/binary-clisp/lisp.run
+%{_libdir}/%{name}/%{version}/binary-clisp/maxima.mem
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/%{version}
 %{_datadir}/%{name}/%{version}/demo
 %{_datadir}/%{name}/%{version}/share
 %{_datadir}/%{name}/%{version}/tests
-%{_mandir}/man?/*
+%{_mandir}/man1/maxima.1*
+%lang(ru) %{_mandir}/ru/man1/maxima.1*
+%{_infodir}/imaxima.info*
 %{_infodir}/maxima.info*
 %{_infodir}/maxima-index.lisp
-%{_infodir}/imaxima.info*
+# packages
+%{_infodir}/abs_integrate.info*
+%{_infodir}/drawutils.info*
+%{_infodir}/kovacicODE.info*
+%{_infodir}/logic.info*
+
+%files -n bash-completion-maxima
+%defattr(644,root,root,755)
+%{_datadir}/bash-completion/completions/maxima
+%{_datadir}/bash-completion/completions/rmaxima
 
 %files xmaxima
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmaxima
-%{_datadir}/maxima/%{version}/xmaxima
-%{_desktopdir}/*.desktop
+%{_datadir}/%{name}/%{version}/xmaxima
+%{_desktopdir}/xmaxima.desktop
 %{_infodir}/xmaxima.info*
-%{_pixmapsdir}/*
+%{_datadir}/mime/packages/x-mac.xml
+%{_datadir}/mime/packages/x-maxima-out.xml
+%{_pixmapsdir}/maxima-new.png
+%{_pixmapsdir}/maxima-new.svg
+%{_pixmapsdir}/text-x-maxima-out.svg
+%{_pixmapsdir}/text-x-maximasession.svg
 
+%files -n bash-completion-xmaxima
+%defattr(644,root,root,755)
+%{_datadir}/bash-completion/completions/xmaxima
+
+%if %{with emacs}
 %files -n emacs-maxima-pkg
 %defattr(644,root,root,755)
 %{_emacs_lispdir}/%{name}
 %{_emacs_lispdir}/site-start.d/%{name}-mode-init.el
+%endif
 
 %files doc
 %defattr(644,root,root,755)

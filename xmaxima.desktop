@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=XMaxima
-Exec=xmaxima
-Icon=maxima-icon
-Terminal=false
-Type=Application
-Categories=Education;Science;Math;
-# vi: encoding=utf-8
