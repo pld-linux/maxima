@@ -214,10 +214,14 @@ fi
 %attr(755,root,root) %{_bindir}/rmaxima
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/%{version}
-%attr(755,root,root) %{_libdir}/%{name}/%{version}/mgnuplot
 %dir %{_libdir}/%{name}/%{version}/binary-clisp
 %attr(755,root,root) %{_libdir}/%{name}/%{version}/binary-clisp/lisp.run
 %{_libdir}/%{name}/%{version}/binary-clisp/maxima.mem
+%if "%{_libexecdir}" != "%{_libdir}"
+%dir %{_libexecdir}/%{name}
+%dir %{_libexecdir}/%{name}/%{version}
+%endif
+%attr(755,root,root) %{_libexecdir}/%{name}/%{version}/mgnuplot
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/%{version}
 %{_datadir}/%{name}/%{version}/demo
