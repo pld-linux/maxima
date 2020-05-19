@@ -11,7 +11,7 @@ diff -burNp maxima-5.17.0/common.mk maxima-5.17.0-dud/common.mk
  dochtmldir = $(docdir)/html
  docsharedir = $(docdir)/share
  demodir = $(verpkgdatadir)/demo
- emacsdir = $(verpkgdatadir)/emacs
+ emacsdir = $(EMACSDIR)
  sharedir = $(verpkgdatadir)/share
 -instsrcdir = $(verpkgdatadir)/src
 +instsrcdir = $(prefix)/src/@PACKAGE@-@VERSION@

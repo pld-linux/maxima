@@ -69,8 +69,8 @@
 -@dircategory Mathematics/Maxima
 +@dircategory Scientific software:
  @direntry
--* MYTOPIC: (maxima/mytopic).           Maxima share package MYTOPIC for foo bar baz quux.
-+* MYTOPIC: (maxima/mytopic).		Maxima share package MYTOPIC for foo bar baz quux
+-* Package MYPACKAGE: (maxima)Maxima share package MYPACKAGE for foo bar baz quux.
++* Package MYPACKAGE: (maxima)	Maxima share package MYPACKAGE for foo bar baz quux
  @end direntry
  
  @node Top, Introduction to MYTOPIC, (dir), (dir)

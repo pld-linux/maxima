@@ -5,19 +5,20 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.41.0
-Release:	3
+Version:	5.43.2
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Math
 Source0:	http://downloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	972c51384d7895c88d78eb045c6aedb2
+# Source0-md5:	ff334e89324dc4b1cd2aa89e1faaf436
 Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-missed-files.patch
 Patch3:		x%{name}-doc.patch
 Patch4:		%{name}-install.patch
 Patch5:		%{name}-info-compressed.patch
+Patch6:		utf8.patch
 URL:		http://maxima.sourceforge.net/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -142,6 +143,7 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__aclocal}
@@ -149,7 +151,8 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 %{__autoconf}
 %configure \
 	--enable-clisp \
-	--enable-gettext
+	--enable-gettext \
+	--with-emacs-prefix=%{_emacs_lispdir}/%{name}
 
 # TODO: --enable-lang-de[-utf8?] --enable-lang-es[-utf8?] --enable-lang-pt[-utf8?] --enable-lang-pt_BR[-utf8?]
 # for localized info pages
@@ -168,10 +171,9 @@ install -Dp doc/man/ru/maxima.1 $RPM_BUILD_ROOT%{_mandir}/ru/man1/maxima.1
 
 %if %{with emacs}
 install -d $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/emacs $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
 %else
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/%{name}/%{version}/emacs
+%{__rm} -r $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
 %endif
 
 %find_lang %{name}
@@ -247,12 +249,13 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmaxima
 %{_datadir}/%{name}/%{version}/xmaxima
-%{_desktopdir}/xmaxima.desktop
+%{_desktopdir}/net.sourceforge.maxima.xmaxima.desktop
+%{_datadir}/metainfo/net.sourceforge.maxima.xmaxima.appdata.xml
 %{_infodir}/xmaxima.info*
 %{_datadir}/mime/packages/x-mac.xml
 %{_datadir}/mime/packages/x-maxima-out.xml
-%{_pixmapsdir}/maxima-new.png
-%{_pixmapsdir}/maxima-new.svg
+%{_pixmapsdir}/net.sourceforge.maxima.png
+%{_pixmapsdir}/net.sourceforge.maxima.svg
 %{_pixmapsdir}/text-x-maxima-out.svg
 %{_pixmapsdir}/text-x-maximasession.svg
 

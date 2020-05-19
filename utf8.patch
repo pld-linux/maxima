@@ -1,0 +1,11 @@
+--- maxima-5.43.2/interfaces/emacs/imaxima/imaxima.texi~	2020-05-19 09:16:24.000000000 +0200
++++ maxima-5.43.2/interfaces/emacs/imaxima/imaxima.texi	2020-05-19 09:16:53.255802318 +0200
+@@ -108,7 +108,7 @@
+ 
+ 
+ To do line breaking imaxima requires the LaTeX package @code{breqn}. This
+-package is officially distributed by Morten Høgholm from
++package is officially distributed by Morten HÃ¸gholm from
+ @uref{http://www.ctan.org/tex-archive/macros/latex/contrib/mh} as mh.zip.
+ 
+ Alternatively, for the easy installation, you may download
