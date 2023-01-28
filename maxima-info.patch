@@ -60,8 +60,8 @@
  @end direntry
  
  @menu
---- maxima-5.41.0/share/template-standalone.texi.orig	2017-09-28 03:41:16.000000000 +0200
-+++ maxima-5.41.0/share/template-standalone.texi	2017-12-05 20:54:36.038225183 +0100
+--- maxima-5.46.0/share/template-standalone.texi.orig	2023-01-28 10:21:39.597112694 +0100
++++ maxima-5.46.0/share/template-standalone.texi	2023-01-28 10:24:44.079446601 +0100
 @@ -21,9 +21,9 @@
  @end macro
  @end ifinfo
@@ -70,10 +70,10 @@
 +@dircategory Scientific software:
  @direntry
 -* Package MYPACKAGE: (maxima)Maxima share package MYPACKAGE for foo bar baz quux.
-+* Package MYPACKAGE: (maxima)	Maxima share package MYPACKAGE for foo bar baz quux
++* Package MYPACKAGE: (maxima).	Maxima share package MYPACKAGE for foo bar baz quux
  @end direntry
  
- @node Top, Introduction to MYTOPIC, (dir), (dir)
+ @node Top, Introduction to package MYPACKAGE, (dir), (dir)
 --- maxima-5.41.0/share/contrib/integration/abs_integrate.texi.orig	2017-09-28 03:41:16.000000000 +0200
 +++ maxima-5.41.0/share/contrib/integration/abs_integrate.texi	2017-12-05 20:55:44.868224398 +0100
 @@ -9,9 +9,9 @@
@@ -130,3 +130,17 @@
  @end direntry
  
  @node Top, Introduction to kovacicODE, (dir), (dir)
+--- maxima-5.46.0/share/contrib/symplectic_ode/symplectic_ode.texi.orig	2021-05-16 01:20:53.000000000 +0200
++++ maxima-5.46.0/share/contrib/symplectic_ode/symplectic_ode.texi	2023-01-28 14:45:42.237952409 +0100
+@@ -9,9 +9,9 @@
+ @end macro
+ @end ifinfo
+ 
+-@dircategory Mathematics/Maxima
++@dircategory Scientific software:
+ @direntry
+-* symplectic_ode: (maxima/symplectic_ode).           Maxima share package symplectic_ode for solving Hamilton's equations.
++* symplectic_ode: (maxima/symplectic_ode).	Maxima share package symplectic_ode for solving Hamilton's equations
+ @end direntry
+ 
+ @node Top, Introduction to symplectic_ode, (dir), (dir)

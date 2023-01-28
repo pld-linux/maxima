@@ -5,21 +5,20 @@
 Summary:	Maxima Symbolic Computation Program
 Summary(pl.UTF-8):	Program do obliczeń symbolicznych Maxima
 Name:		maxima
-Version:	5.43.2
+Version:	5.46.0
 Release:	1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Group:		Applications/Math
-Source0:	http://downloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
-# Source0-md5:	ff334e89324dc4b1cd2aa89e1faaf436
+Source0:	https://downloads.sourceforge.net/maxima/%{name}-%{version}.tar.gz
+# Source0-md5:	3c01f1daa6936e11d8713fef7751d3fe
 Source2:	%{name}-mode-init.el
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-missed-files.patch
 Patch3:		x%{name}-doc.patch
 Patch4:		%{name}-install.patch
 Patch5:		%{name}-info-compressed.patch
-Patch6:		utf8.patch
-URL:		http://maxima.sourceforge.net/
+URL:		https://maxima.sourceforge.io/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	clisp
@@ -143,7 +142,6 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 
 %build
 %{__aclocal}
@@ -154,7 +152,7 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 	--enable-gettext \
 	--with-emacs-prefix=%{_emacs_lispdir}/%{name}
 
-# TODO: --enable-lang-de[-utf8?] --enable-lang-es[-utf8?] --enable-lang-pt[-utf8?] --enable-lang-pt_BR[-utf8?]
+# TODO: --enable-lang-de --enable-lang-es --enable-lang-pt --enable-lang-pt_BR --enable-lang-ru
 # for localized info pages
 
 %{__make}
@@ -163,7 +161,8 @@ touch doc/info/{maximahtml.mk,category-macros.texi} src/{clisp,cmucl,gcl}-depend
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	%{!?with_emacs:emacsdir=/emacs}
 
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 
@@ -173,7 +172,8 @@ install -Dp doc/man/ru/maxima.1 $RPM_BUILD_ROOT%{_mandir}/ru/man1/maxima.1
 install -d $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
 install %{SOURCE2} $RPM_BUILD_ROOT%{_emacs_lispdir}/site-start.d
 %else
-%{__rm} -r $RPM_BUILD_ROOT%{_emacs_lispdir}/%{name}
+%{__rm} -r $RPM_BUILD_ROOT/emacs
+%{__rm} -r $RPM_BUILD_ROOT%{_infodir}/imaxima.info*
 %endif
 
 %find_lang %{name}
@@ -195,6 +195,12 @@ rm -rf $RPM_BUILD_ROOT
 %update_mime_database
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
 
+%post	-n emacs-maxima-pkg -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%postun	-n emacs-maxima-pkg -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
 %triggerin doc -- %{name} = %{epoch}:%{version}
 if [ -d %{_docdir}/%{name}-doc-%{version} ]; then
 	ln -snf %{_docdir}/%{name}-doc-%{version} %{_datadir}/%{name}/%{version}/doc
@@ -211,7 +217,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog-5* README
+%doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/maxima
 %attr(755,root,root) %{_bindir}/rmaxima
 %dir %{_libdir}/%{name}
@@ -230,8 +236,8 @@ fi
 %{_datadir}/%{name}/%{version}/share
 %{_datadir}/%{name}/%{version}/tests
 %{_mandir}/man1/maxima.1*
+%lang(ru) %{_mandir}/de/man1/maxima.1*
 %lang(ru) %{_mandir}/ru/man1/maxima.1*
-%{_infodir}/imaxima.info*
 %{_infodir}/maxima.info*
 %{_infodir}/maxima-index.lisp
 # packages
@@ -239,6 +245,7 @@ fi
 %{_infodir}/drawutils.info*
 %{_infodir}/kovacicODE.info*
 %{_infodir}/logic.info*
+%{_infodir}/symplectic_ode.info*
 
 %files -n bash-completion-maxima
 %defattr(644,root,root,755)
@@ -268,6 +275,7 @@ fi
 %defattr(644,root,root,755)
 %{_emacs_lispdir}/%{name}
 %{_emacs_lispdir}/site-start.d/%{name}-mode-init.el
+%{_infodir}/imaxima.info*
 %endif
 
 %files doc
