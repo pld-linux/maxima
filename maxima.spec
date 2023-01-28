@@ -33,6 +33,9 @@ Requires:	gzip
 Suggests:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# sources are in (c)lisp
+%define		_debugsource_packages	0
+
 %description
 Maxima is a full symbolic computation program. It is full featured
 doing symbolic manipulation of polynomials, matrices, rational
